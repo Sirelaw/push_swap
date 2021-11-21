@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/21 02:39:39 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:15:10 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ t_list	*create_linked_list(int *arr)
 	return (lst);
 }
 
-void	check_sort(t_list *lst)
+void	print_all(void *content)
+{
+	ft_putnbr_fd(*((int *) content), STDIN_FILENO);
+	ft_putstr_fd(" ", STDIN_FILENO);
+}
+
+int	check_sort(t_list *lst, int ret)
 {
 	t_list	*p;
 	int		num1;
@@ -40,14 +46,17 @@ void	check_sort(t_list *lst)
 		p = p->next;
 	}
 	if (p->next == NULL)
-		exit(EXIT_SUCCESS);
+	{
+		ft_lstiter(lst, print_all);
+		ft_putchar_fd('\n', 1);
+		if (ret == 1)
+			exit(EXIT_SUCCESS);
+		return (1);
+	}
+	return (0);
 }
 
-void	print_all(void *content)
-{
-	ft_putnbr_fd(*((int *) content), STDIN_FILENO);
-	ft_putstr_fd(" ", STDIN_FILENO);
-}
+
 
 int	*get_index(int *num)
 {
@@ -75,16 +84,34 @@ int	*get_index(int *num)
 	free(num);
 	return (indexx);
 }
-void	sort_3(t_list **lst, int num)
+
+void	sort_3(t_list **lst, int num, int ret)
 {
-	t_list	*p;
-	int		i;
+	int		n1;
+	int		n2;
+	int		n3;
 	
-	p = *lst;
-	i = p->content;
 	if (num == 2)
+	{
 		swap_sa_sb_ss(lst, "sa");
-		
+		check_sort(*lst, ret);
+	}
+	while (!check_sort(*lst, ret))
+	{
+		n1 = *((int *)(*lst)->content);
+		n2 = *((int *)((*lst)->next)->content);
+		n3 = *((int *)(((*lst)->next)->next)->content);
+		if ((n1 < n3) && (n2 > n3))//OK 1 3 2
+			reverse_rotate_rra_rrb_rrr(lst, "rra");
+		if ((n1 > n2) && (n1 < n3))//OK 2 1 3
+			swap_sa_sb_ss(lst, "sa");
+		if ((n1 > n2) && (n2 > n3))//OK 3 2 1
+			swap_sa_sb_ss(lst, "sa");
+		if ((n1 > n3) && (n2 > n1))//OK 2 3 1
+			reverse_rotate_rra_rrb_rrr(lst, "rra");
+		if ((n1 > n3) && (n3 > n2))//OK 3 1 2
+			rotate_ra_rb_rr(lst, "ra");
+	}
 }
 
 int	main(int argc, char **argv)
@@ -99,23 +126,22 @@ int	main(int argc, char **argv)
 		return (1);
 	num = get_input(argc, argv);
 	num = get_index(num);
-	
 	la = create_linked_list(num);
-	check_sort(la);
-	ft_lstiter(la, print_all);
+	if (check_sort(la, 1))
+		return (0);
 	if (num[0] <= 3)
-		sort_3(&la, num[0]);
+		sort_3(&la, num[0], 1);
 	// else if (num[0] <= 5)
 	// 	sort_5(&la, num[0]);
 	// else if (num[0] <= 7)
 	// 	sort_7(&la, num[0]);
 	// else
 	// 	sort_5(&la, num[0]);
-	ft_lstiter(la, print_all);
-	ft_putchar_fd('\n', 1);
-	ft_lstiter(lb, print_all);
-	ft_putchar_fd('\n', 1);
-	ft_lstiter(la, print_all);
+	// ft_lstiter(la, print_all);
+	// ft_putchar_fd('\n', 1);
+	// ft_lstiter(lb, print_all);
+	// ft_putchar_fd('\n', 1);
+	// ft_lstiter(la, print_all);
 	free(num);
 	return (0);
 }
