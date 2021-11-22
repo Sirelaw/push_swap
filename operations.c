@@ -6,13 +6,13 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 19:25:33 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/20 19:27:47 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:48:38 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_a_b(t_list **la, t_list **lb, char *s)
+void	push(t_list **la, t_list **lb, char *s)
 {
 	t_list	*temp;
 
@@ -22,11 +22,10 @@ void	push_a_b(t_list **la, t_list **lb, char *s)
 		ft_lstadd_front(lb, *la);			
 		*la = temp;
 		write(STDOUT_FILENO, s, ft_strlen(s));
-		write(STDOUT_FILENO, "\n", 1);
 	}
 }
 
-void	swap_sa_sb_ss(t_list **lst, char *s)
+void	swap(t_list **lst, char *s)
 {
 	t_list	*temp;
 
@@ -37,11 +36,10 @@ void	swap_sa_sb_ss(t_list **lst, char *s)
 		temp->next = *lst;
 		*lst = temp;
 		write(STDOUT_FILENO, s, ft_strlen(s));
-		write(STDOUT_FILENO, "\n", 1);
 	}
 }
 
-void	rotate_ra_rb_rr(t_list **lst, char *s)
+void	rotate(t_list **lst, char *s)
 {
 	t_list	*temp;
 	t_list	*p;
@@ -56,11 +54,10 @@ void	rotate_ra_rb_rr(t_list **lst, char *s)
 		(*lst)->next = NULL;
 		*lst = temp;
 		write(STDOUT_FILENO, s, ft_strlen(s));
-		write(STDOUT_FILENO, "\n", 1);
 	}
 }
 
-void	reverse_rotate_rra_rrb_rrr(t_list **lst, char *s)
+void	reverse_rotate(t_list **lst, char *s)
 {
 	t_list	*p1;
 	t_list	*p2;
@@ -82,6 +79,5 @@ void	reverse_rotate_rra_rrb_rrr(t_list **lst, char *s)
 		}
 	}
 	write(STDOUT_FILENO, s, ft_strlen(s));
-	write(STDOUT_FILENO, "\n", 1);
 }
 
