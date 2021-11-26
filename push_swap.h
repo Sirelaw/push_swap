@@ -5,6 +5,8 @@
 # include <stdlib.h>
 # include <limits.h>
 # include "libft/libft.h"
+# include <stdio.h>
+//# include "push_swap.c"
 
 void	push(t_list **la, t_list **lb, char *s);
 void	swap(t_list **lst, char *s);

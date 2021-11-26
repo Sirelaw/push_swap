@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/22 19:44:36 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:47:32 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_list	*create_linked_list(int *arr)
 
 void	print_all(void *content)
 {
-	ft_putnbr_fd(*((int *) content), STDIN_FILENO);
-	ft_putstr_fd(" ", STDIN_FILENO);
+	ft_putnbr_fd(*((int *) content), STDOUT_FILENO);
+	ft_putstr_fd(" ", STDOUT_FILENO);
 }
 
 int	check_sort(t_list *lst, int ret)
@@ -47,16 +47,12 @@ int	check_sort(t_list *lst, int ret)
 	}
 	if (p->next == NULL)
 	{
-		// ft_lstiter(lst, print_all);
-		// ft_putchar_fd('\n', 1);
 		if (ret == 1)
 			exit(EXIT_SUCCESS);
 		return (1);
 	}
 	return (0);
 }
-
-
 
 int	*get_index(int *num)
 {
@@ -154,9 +150,95 @@ void	sort_5(t_list **la, t_list **lb,int num)
 		sort_3(la, 3, 0);
 	while ((*lb) != NULL)
 		push(lb, la, "pa\n");
-	ft_lstiter(*la, print_all);
-	ft_putchar_fd('\n', 1);
+	// ft_lstiter(*la, print_all);
+	// ft_putchar_fd('\n', 1);
 	check_sort(*la, 1);
+}
+
+void print_stack(t_list *la)
+{
+	t_list	*p1;
+	char	*a;
+
+	p1 = la;
+	while (la->next != p1)
+	{
+		a = ft_itoa(*((int *)la->content));
+		printf("	|%3s|\n", a);
+		la = la->next;
+	}
+	a = ft_itoa(*((int *)la->content));
+	printf("	|%3s|\n", a);
+	la->next =  NULL;
+}
+
+int	*find_lis(t_list *lst, int len)
+{
+	int	i;
+	int j;
+	t_list	*p;
+
+	p = lst;
+	while (p->next != NULL)
+		p = p->next;
+	p->next = lst;
+	p = p->next;
+	print_stack(p);
+	//ft_lstiter(p, print_all);
+	return (0);
+}
+
+int	get_max(int *num, int len)
+{
+	int	i;
+	int max;
+
+	i = 0;
+	max = 0;
+	while (i++ < len)
+	{
+		if (max < num[i - 1])
+			max = num[i - 1];
+	}
+	return (max);
+}
+
+int	lis(t_list *lst, int len)
+{
+	int		max;
+	int		i;
+	int		j;
+	t_list	*p;
+	int		*num;
+
+	max = 0;
+	p = lst;
+	i = 0;
+	j = 0;
+	if (p->next == NULL)
+		return (1);
+	num = ft_calloc(len, sizeof(int));
+	while (j++ < len)
+		num[j - 1] = 1;
+	while (p->next != NULL)
+	{
+		if (*(int *)((p->next)->content) < *(int *)(lst->content))
+		{
+			p = p->next;
+			continue;
+		}
+		if (*(int *)((p->next)->content) > *(int *)(p->content))
+			num[i++] = 1 + lis(p->next, len--);
+		else
+		{
+			num[i++] = lis(p->next, len--);	
+			len--;
+		}
+		p = p->next;
+	}
+	max = get_max(num, len);
+	free(num);
+	return (max);
 }
 
 int	main(int argc, char **argv)
@@ -166,16 +248,19 @@ int	main(int argc, char **argv)
 	t_list	*la;
 	t_list	*lb;
 
+	lb = NULL;
+	la = NULL;
 	i = 0;
 	if (argc < 2)
 		return (1);
 	num = get_input(argc, argv);
 	num = get_index(num);
 	la = create_linked_list(num);
+	// find_lis(la, num[0]);
+	//ft_lstiter(la, print_all);
+	//ft_putnbr_fd(lis(la, num[0]), 1);
 	if (check_sort(la, 1))
 		return (0);
-	ft_lstiter(la, print_all);
-	ft_putchar_fd('\n', 1);
 	if (num[0] <= 3)
 		sort_3(&la, num[0], 1);
 	else
