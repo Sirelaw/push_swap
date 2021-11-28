@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/26 13:47:32 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/11/28 22:48:08 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,33 @@ t_list	*create_linked_list(int *arr)
 
 void	print_all(void *content)
 {
-	ft_putnbr_fd(*((int *) content), STDOUT_FILENO);
-	ft_putstr_fd(" ", STDOUT_FILENO);
+	ft_putnbr_fd(*((int *) content), STDERR_FILENO);
+	ft_putstr_fd(" ", STDERR_FILENO);
+}
+
+void print_stacks(t_list *la, t_list *lb, int num)
+{
+	t_list	*p1;
+	t_list	*pb;
+	char	*a;
+	char	*b;
+
+	while (num--)
+	{
+		if (la != NULL)
+			a = ft_itoa(*((int *)la->content));
+		else
+			a = "___";
+		if (lb != NULL)
+			b = ft_itoa(*((int *)lb->content));
+		else
+			b = "___";
+		printf("	|%03s|		|%03s|	\n", a, b);
+		if (la != NULL)
+			la = la->next;
+		if (lb != NULL)
+			lb = lb->next;
+	}
 }
 
 int	check_sort(t_list *lst, int ret)
@@ -52,33 +77,6 @@ int	check_sort(t_list *lst, int ret)
 		return (1);
 	}
 	return (0);
-}
-
-int	*get_index(int *num)
-{
-	int i;
-	int	j;
-	int	smaller;
-	int	*indexx;
-
-	indexx = ft_calloc(num[0] + 1, sizeof(int));
-	i = 0;
-	j = 1;
-	smaller = 1;
-	indexx[0] = num[0];
-	while (i++ < num[0])
-	{
-		j = 0;
-		while (j++ < num[0])
-		{
-			if (num[j] < num[i])
-				smaller++;
-		}
-		indexx[i] = smaller;
-		smaller = 1;
-	}
-	free(num);
-	return (indexx);
 }
 
 void	sort_3(t_list **lst, int num, int ret)
@@ -110,6 +108,149 @@ void	sort_3(t_list **lst, int num, int ret)
 	}
 }
 
+
+void n_divider_sort(t_list **la, t_list **lb, int len, int n)
+{
+	int i;
+	int	part;
+	int pushes;
+	int move_count;
+	t_list	*p;
+	
+	i = 1;
+	while (i <= n)
+	{
+		pushes = 0;
+		part = (len / n) * i;
+		// ft_putnbr_fd(part, 1);
+		// ft_putstr_fd("\n", 1);
+		while (pushes < (len / n))
+		{
+			if (*((int *)(*la)->content) > part)
+				rotate(la, "ra\n");
+			else
+			{
+				push(la, lb, "pb\n");
+				pushes++;
+			}
+		}
+		i++;
+	}
+	while ((*la) != NULL)
+		push(la, lb, "pb\n");
+	while (len)
+	{
+		move_count = 0;
+		p = *lb;
+		while (*((int *)p->content) != len)
+		{
+			p = p->next;
+			move_count++;
+		}
+		if (move_count <= len/2)
+		{
+			while (*((int *)(*lb)->content) != len)
+				rotate(lb, "rb\n");
+		}
+		else
+		{
+			while (*((int *)(*lb)->content) != len)
+				reverse_rotate(lb, "rrb\n");
+		}
+		push(lb, la, "pa\n");
+		len--;
+	}
+}
+
+void	quick_sort(t_list **la, t_list **lb, int len, int prev_pivot)
+{
+	int	pivot;
+	int pushes;
+
+	pushes = 0;
+	pivot = prev_pivot + (len / 2);
+	while ((pushes < pivot - prev_pivot))
+	{
+		if (*((int *)(*la)->content) > pivot)
+			rotate(la, "ra\n");
+		else
+		{
+			push(la, lb, "pb\n");
+			pushes++;
+			len--;
+			if (len == 2)
+			{
+				if (*((int *)(*la)->content) > *((int *)(*la)->next->content))
+					swap(la, "sa\n");
+				break;
+			}
+		}
+	}
+	if (len != 2)
+		quick_sort(la, lb, len, pivot);
+}
+
+int	*get_index(int *num)
+{
+	int i;
+	int	j;
+	int	smaller;
+	int	*indexx;
+
+	indexx = ft_calloc(num[0] + 1, sizeof(int));
+	i = 0;
+	j = 1;
+	smaller = 1;
+	indexx[0] = num[0];
+	while (i++ < num[0])
+	{
+		j = 0;
+		while (j++ < num[0])
+		{
+			if (num[j] < num[i])
+				smaller++;
+		}
+		indexx[i] = smaller;
+		smaller = 1;
+	}
+	free(num);
+	return (indexx);
+}
+
+void	sort_5_quick(t_list **la, t_list **lb,int num)
+{
+	t_list	*p;
+	int		n1;
+	int		move_count;
+
+	quick_sort(la, lb, num, 0);
+	n1 = *((int *)(*la)->content) - 1;
+	while (n1)
+	{
+		move_count = 0;
+		p = *lb;
+		while (*((int *)p->content) != n1)
+		{
+			p = p->next;
+			move_count++;
+		}
+		if (move_count <= n1/2)
+		{
+			while (*((int *)(*lb)->content) != n1)
+				rotate(lb, "rb\n");
+		}
+		else
+		{
+			while (*((int *)(*lb)->content) != n1)
+				reverse_rotate(lb, "rrb\n");
+		}
+		push(lb, la, "pa\n");
+		n1--;
+	}
+	ft_lstiter(*la, print_all);
+	// ft_lstiter(*lb, print_all);
+}
+
 void	sort_5(t_list **la, t_list **lb,int num)
 {
 	t_list	*p;
@@ -130,7 +271,7 @@ void	sort_5(t_list **la, t_list **lb,int num)
 			p = p->next;
 			move_count++;
 		}
-		if (move_count <= stack_size/2)
+		if (move_count <= (stack_size/2))
 		{
 			while (*((int *)(*la)->content) != n1)
 				rotate(la, "ra\n");
@@ -150,9 +291,7 @@ void	sort_5(t_list **la, t_list **lb,int num)
 		sort_3(la, 3, 0);
 	while ((*lb) != NULL)
 		push(lb, la, "pa\n");
-	// ft_lstiter(*la, print_all);
-	// ft_putchar_fd('\n', 1);
-	check_sort(*la, 1);
+	ft_lstiter(*la, print_all);
 }
 
 void print_stack(t_list *la)
@@ -172,21 +311,6 @@ void print_stack(t_list *la)
 	la->next =  NULL;
 }
 
-int	*find_lis(t_list *lst, int len)
-{
-	int	i;
-	int j;
-	t_list	*p;
-
-	p = lst;
-	while (p->next != NULL)
-		p = p->next;
-	p->next = lst;
-	p = p->next;
-	print_stack(p);
-	//ft_lstiter(p, print_all);
-	return (0);
-}
 
 int	get_max(int *num, int len)
 {
@@ -203,43 +327,6 @@ int	get_max(int *num, int len)
 	return (max);
 }
 
-int	lis(t_list *lst, int len)
-{
-	int		max;
-	int		i;
-	int		j;
-	t_list	*p;
-	int		*num;
-
-	max = 0;
-	p = lst;
-	i = 0;
-	j = 0;
-	if (p->next == NULL)
-		return (1);
-	num = ft_calloc(len, sizeof(int));
-	while (j++ < len)
-		num[j - 1] = 1;
-	while (p->next != NULL)
-	{
-		if (*(int *)((p->next)->content) < *(int *)(lst->content))
-		{
-			p = p->next;
-			continue;
-		}
-		if (*(int *)((p->next)->content) > *(int *)(p->content))
-			num[i++] = 1 + lis(p->next, len--);
-		else
-		{
-			num[i++] = lis(p->next, len--);	
-			len--;
-		}
-		p = p->next;
-	}
-	max = get_max(num, len);
-	free(num);
-	return (max);
-}
 
 int	main(int argc, char **argv)
 {
@@ -258,22 +345,23 @@ int	main(int argc, char **argv)
 	la = create_linked_list(num);
 	// find_lis(la, num[0]);
 	//ft_lstiter(la, print_all);
-	//ft_putnbr_fd(lis(la, num[0]), 1);
 	if (check_sort(la, 1))
 		return (0);
 	if (num[0] <= 3)
 		sort_3(&la, num[0], 1);
 	else
-		sort_5(&la, &lb, num[0]);
+		// sort_5(&la, &lb, num[0]);
+		//sort_5_quick(&la, &lb, num[0]);
+		n_divider_sort(&la, &lb, num[0], 6);
 	// else if (num[0] <= 7)
 	// 	sort_7(&la, num[0]);
 	// else
 	// 	sort_5(&la, num[0]);
-	// ft_lstiter(la, print_all);
+	//ft_lstiter(la, print_all);
 	// ft_putchar_fd('\n', 1);
 	// ft_lstiter(lb, print_all);
 	// ft_putchar_fd('\n', 1);
-	// ft_lstiter(la, print_all);
+	ft_lstiter(la, print_all);
 	free(num);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 22:10:30 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/26 14:10:06 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/11/26 15:03:16 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+
 typedef struct s_list
 {
 	void			*content;
+	int				pivot;
 	struct s_list	*next;
 }	t_list;
 

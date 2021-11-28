@@ -13,6 +13,30 @@ t_list	*create_linked_list(int *arr)
 	return (lst);
 }
 
+int	check_sort(t_list *lst, int ret)
+{
+	t_list	*p;
+	int		num1;
+	int		num2;
+	
+	p = lst;
+	while (p->next != NULL)
+	{
+		num1 = *((int *)(p->content));
+		num2 = *((int *)((p->next)->content));
+		if (num1 > num2)
+			break;
+		p = p->next;
+	}
+	if (p->next == NULL)
+	{
+		if (ret == 1)
+			exit(EXIT_SUCCESS);
+		return (1);
+	}
+	return (0);
+}
+
 void	print_all(void *content)
 {
 	ft_putnbr_fd(*((int *) content), STDOUT_FILENO);
@@ -42,6 +66,32 @@ void print_stacks(t_list *la, t_list *lb, int num)
 		if (lb != NULL)
 			lb = lb->next;
 	}
+}
+
+void	quick_sort(t_list **la, t_list **lb, int len, int prev_pivot)
+{
+	int	pivot;
+	int pushes;
+	
+	pushes = 0;
+	pivot = prev_pivot + (len / 2);
+	if (len < 3)
+		pivot = prev_pivot + 1;
+	while (pushes < pivot - prev_pivot)
+	{
+		if (*((int *)(*la)->content) > pivot)
+			rotate(la, "ra\n");
+		else
+		{
+			push(la, lb, "pb\n");
+			pushes++;
+		}
+	}
+	ft_putchar_fd('\n', 1);
+	ft_putnbr_fd(pivot, 1);
+	ft_putchar_fd('\n', 1);
+	if ((len >= 1) && (!check_sort(*la, 0)))
+		 quick_sort(la, lb, len / 2, pivot);
 }
 
 int	*get_index(int *num)
@@ -90,8 +140,10 @@ int main(int argc, char **argv)
 	num = get_index(num);
 	la = create_linked_list(num);
 	//ft_lstiter(la, print_all);
+	quick_sort(&la, &lb, num[0], 0);
 	print_stacks(la, lb, num[0]);
 	s = malloc(4);
+	
 	while (1)
 	{
 		while (i++ < 4)
