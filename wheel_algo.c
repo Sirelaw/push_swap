@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:43:03 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/06 18:01:55 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:04:22 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int smallest(int *arr, int size)//Ok
 		}
 		i++;
 	}
-	return (j);
+	return (0);
 }
 
 void	rotate_both(t_list **la, t_list **lb, int n)//OK
@@ -277,8 +277,8 @@ void	wheel_algo(t_list **la, t_list **lb)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	min_max[0] = *((int *)(ft_lstlast(*lb))->content);
 	min_max[1] = *((int *)(*lb)->content);
-	// while(*la)
-	// {
+	while(*la)
+	{
 		p = ft_lstelem(*la, magic_algo(*la, *lb, min_max));
 		move_stacks(la, lb, p, min_max);
 		// while (right_insert(*lb, min_max, *((int *)(*la)->content)))
@@ -288,7 +288,7 @@ void	wheel_algo(t_list **la, t_list **lb)
 			min_max[1] = *((int *)(*lb)->content);
 		if (*((int *)(*lb)->content) < min_max[0])
 			min_max[0] = *((int *)(*lb)->content);
-	// }
+	}
 	ft_lstiter(*lb, print_all);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	//move_stack_a(la, 23);
