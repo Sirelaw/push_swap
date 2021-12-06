@@ -6,39 +6,11 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/30 00:44:43 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:46:53 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	search_best_move(t_list *la, int part, int moves[2], int index[2])
-{
-	t_list	*p;
-	int		temp;
-
-	temp = 0;
-	moves[0] = 0;
-	moves[1] = 0;
-	p = la;
-	while (*((int *)(p)->content) > part)
-	{
-		p = p->next;
-		(moves[0])++;
-	}
-	index[0] = *((int *)(p)->content);
-	p = la;
-	while (p->next != NULL)
-	{
-		p = p->next;
-		temp++;
-		if (*((int *)(p)->content) <= part)
-		{
-			moves[1] = temp;
-			index[1] = *((int *)(p)->content);
-		}
-	}
-}
 
 void n_divider_sort(t_list **la, t_list **lb, int len, int n)
 {
@@ -56,7 +28,9 @@ void n_divider_sort(t_list **la, t_list **lb, int len, int n)
 		while (pushes < (len / n))
 		{
 			search_best_move(*la, part, moves, index);
-			moves[1] = len - pushes - moves[1];
+			moves[1] = len - pushes - moves[1] /* - ((len / n) * (i - 1)) */;
+			// ft_putnbr_fd(moves[1], 1);
+			// ft_putstr_fd("\n", 1);
 			if (moves[0] <= moves[1])
 			{
 				while (*((int *)(*la)->content) > part)
@@ -64,10 +38,10 @@ void n_divider_sort(t_list **la, t_list **lb, int len, int n)
 					if ((*lb != NULL) && (*((int *)(*lb)->content) > index[0]))
 					{
 						rotate(la, "");
-						rotate(lb, "Arr\n");
+						rotate(lb, "rr\n");
 					}
 					else
-						rotate(la, "Ara\n");
+						rotate(la, "ra\n");
 				}
 			}
 			else
@@ -77,28 +51,109 @@ void n_divider_sort(t_list **la, t_list **lb, int len, int n)
 					if ((*lb != NULL) && (*((int *)(*lb)->content) < index[0]))
 					{
 						reverse_rotate(la, "");
-						reverse_rotate(lb, "Arrr\n");
+						reverse_rotate(lb, "rrr\n");
 					}
 					else
-						reverse_rotate(la, "Arra\n");
+						reverse_rotate(la, "rra\n");
 				}
 			}
-			push(la, lb, "Apb\n");
+			push(la, lb, "pb\n");
 			pushes++;
 		}
 		i++;
+		// if (i == n)
+		// 	last_n_divide(la, lb, len, n);
 	}
 	// ft_lstiter(*la, print_all);
 	// ft_putstr_fd("\n", 2);
 	while ((*la) != NULL)
-		push(la, lb, "Apb\n");
-	
+		push(la, lb, "pb\n");
 	find_largest_push_back(la, lb, len);
 }
 
+// void n_divider_sort_correct(t_list **la, t_list **lb, int len, int n)
+// {
+// 	int i;
+// 	int	part;
+// 	int pushes;
+// 	int	moves[2];
+// 	int index[2];
+// 	int min = len;
+// 	int max = 1;
+	
+// 	i = 1;
+// 	while (i <= n)
+// 	{
+// 		pushes = 0;
+// 		part = (len / n) * i;
+// 		while (pushes < (len / n))
+// 		{
+// 			search_best_move(*la, part, moves, index);
+// 			moves[1] = len - pushes - moves[1] - ((len / n) * (i - 1) );
+// 			// ft_putnbr_fd(moves[1], 1);
+// 			// ft_putstr_fd("\n", 1);
+// 			if (moves[0] <= moves[1])
+// 			{
+// 				while (*((int *)(*la)->content) > part)
+// 				{
+// 					if (((*lb != NULL) && (*((int *)(*lb)->content) > index[0])) || (index[0] < min))
+// 					{
+// 						rotate(la, "");
+// 						rotate(lb, "rr\n");
+// 						// if (*((int *)(*la)->content) < part)
+// 						// {
+// 						// 		while (((*lb != NULL) && (*((int *)(*lb)->content) > index[0])) && !(index[0] < min))
+// 						// 			rotate(lb, "rb\n");
+// 						// 		if (index[0] < min)
+// 						// 		{
+// 						// 			while (B_HEAD_CONTENT != max)
+// 						// 				rotate(lb, "rb\n");
+// 						// 		}
+// 						// }
+// 					}
+// 					else
+// 						rotate(la, "ra\n");
+// 				}
+// 			}
+// 			else
+// 			{
+// 				while (*((int *)(*la)->content) > part)
+// 				{
+// 					if ((*lb != NULL) && (*((int *)(*lb)->content) < index[1]) && (B_LAST < index[1]) && (B_LAST != min))
+// 					{
+// 						reverse_rotate(la, "");
+// 						reverse_rotate(lb, "rrr\n");
+// 						if (*((int *)(*la)->content) < part)
+// 						{
+// 							while ((*lb != NULL) && (*((int *)(*lb)->content) < index[1]) && (B_LAST < index[1]) && (B_LAST != min))
+// 								reverse_rotate(lb, "rrb\n");
+								
+// 						}
+// 					}
+// 					else
+// 						reverse_rotate(la, "rra\n");
+// 				}
+// 			}
+// 			push(la, lb, "pb\n");
+// 			if (B_HEAD_CONTENT < min)
+// 				min = B_HEAD_CONTENT;
+// 			if (B_HEAD_CONTENT > max)
+// 				max = B_HEAD_CONTENT;
+// 			pushes++;
+// 		}
+// 		i++;
+// 		// if (i == n)
+// 		// 	last_n_divide(la, lb, len, n);
+// 	}
+// 	// ft_lstiter(*la, print_all);
+// 	// ft_putstr_fd("\n", 2);
+// 	while ((*la) != NULL)
+// 		push(la, lb, "pb\n");
+// 	find_largest_push_back(la, lb, len);
+// }
 
 
-void	halves_sort(t_list **la, t_list **lb, int len, int prev_pivot)
+void	halves_seek(t_list **la, t_list **lb, int len, int prev_pivot)
 {
 	int	pivot;
 	int pushes;
@@ -123,7 +178,7 @@ void	halves_sort(t_list **la, t_list **lb, int len, int prev_pivot)
 		}
 	}
 	if (len != 2)
-		halves_sort(la, lb, len, pivot);
+		halves_seek(la, lb, len, pivot);
 }
 
 void	sort_n_halves(t_list **la, t_list **lb,int num)
@@ -132,7 +187,7 @@ void	sort_n_halves(t_list **la, t_list **lb,int num)
 	int		n1;
 	int		move_count;
 
-	halves_sort(la, lb, num, 0);
+	halves_seek(la, lb, num, 0);
 	n1 = *((int *)(*la)->content) - 1;
 	while (n1)
 	{
@@ -156,51 +211,31 @@ void	sort_n_halves(t_list **la, t_list **lb,int num)
 		push(lb, la, "pa\n");
 		n1--;
 	}
-	ft_lstiter(*la, print_all);
-	// ft_lstiter(*lb, print_all);
 }
 
-void	sort_below_8(t_list **la, t_list **lb,int num)
+void	free_stack_array_exit(t_list **la, t_list **lb, int **num, int exit_stat)
 {
+	int	i;
 	t_list	*p;
-	int		n1;
-	int		stack_size;
-	int		move_count;
-	
-	n1 = 1;
-	stack_size = num;
-	while (stack_size > 3)
+	t_list	*temp;
+
+	i = 0;
+	while (i++ < 2)
 	{
-		if (check_sort(*la, 0))
-			break;
-		move_count = 0;
-		p = *la;
-		while (*((int *)p->content) != n1)
+		if (i - 1 == 0)
+			p = *la;
+		else if (i - 1 == 1)
+			p = *lb;
+		while (p != NULL)
 		{
-			p = p->next;
-			move_count++;
+			temp = p->next;
+			free(p);
+			p = temp;
 		}
-		if (move_count <= (stack_size/2))
-		{
-			while (*((int *)(*la)->content) != n1)
-				rotate(la, "ra\n");
-		}
-		else
-		{
-			while (*((int *)(*la)->content) != n1)
-				reverse_rotate(la, "rra\n");
-		}
-		if (check_sort(*la, 0))
-			break;
-		push(la, lb, "pb\n");
-		n1++;
-		stack_size--;
 	}
-	if (stack_size == 3)
-		sort_3(la, 3, 0);
-	while ((*lb) != NULL)
-		push(lb, la, "pa\n");
-	ft_lstiter(*la, print_all);
+	free(*num);
+	if (exit_stat)
+		exit(exit_stat);
 }
 
 int	main(int argc, char **argv)
@@ -218,17 +253,23 @@ int	main(int argc, char **argv)
 	num = get_input(argc, argv);
 	num = get_index(num);
 	la = create_linked_list(num);
-	// ft_lstiter(la, print_all);
-	// ft_putstr_fd("\n", 2);
-	if (check_sort(la, 1))
-		return (0);
-	if (num[0] <= 3)
-		sort_3(&la, num[0], 1);
-	else
-		// sort_below_8(&la, &lb, num[0]);
-		//sort_n_halves(&la, &lb, num[0]);
-		n_divider_sort(&la, &lb, num[0], 4);
 	ft_lstiter(la, print_all);
-	free(num);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	if (check_sort(la, 1))
+		free_stack_array_exit(&la, &lb, &num, 1);
+	if (num[0] <= 3)
+		sort_3(&la, num[0]);
+	else if (num[0] <= 10)
+		sort_below_10(&la, &lb, num[0]);
+	else
+		// sort_n_halves(&la, &lb, num[0]);
+		wheel_algo(&la, &lb);
+		// n_divider_sort(&la, &lb, num[0], 11);
+		// n_divider_sort_correct(&la, &lb, num[0], 11);
+		//ft_lstiter(la, print_all);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	ft_lstiter(la, print_all);
+	free_stack_array_exit(&la, &lb, &num, 0);
 	return (0);
 }
+

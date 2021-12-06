@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:17:25 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/22 18:45:24 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/04 23:06:43 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(void)
 {
-	write(STDOUT_FILENO, "Error\n", 6);
+	write(STDERR_FILENO, "Error\n", 6);
 	exit(1);
 }
 
@@ -106,7 +106,7 @@ static int	*convert_to_array(char *s)
 		free(ch[i - 1]);
 	}
 	free(ch);
-	return (arr); //Need to free array
+	return (arr);
 }
 
 int			*get_input(int argc, char **argv)

@@ -6,13 +6,13 @@
 #    By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 20:23:06 by oipadeol          #+#    #+#              #
-#    Updated: 2021/11/29 14:22:22 by oipadeol         ###   ########.fr        #
+#    Updated: 2021/12/05 18:50:52 by oipadeol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRC = push_swap.c operations.c input_handling.c OK.c
+SRC = push_swap.c operations.c input_handling.c OK.c wheel_algo.c
 
 #FLAGS = -Wall -Werror -Wextra
 

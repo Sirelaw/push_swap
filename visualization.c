@@ -140,7 +140,7 @@ int main(int argc, char **argv)
 	num = get_index(num);
 	la = create_linked_list(num);
 	//ft_lstiter(la, print_all);
-	quick_sort(&la, &lb, num[0], 0);
+	// quick_sort(&la, &lb, num[0], 0);
 	print_stacks(la, lb, num[0]);
 	s = malloc(4);
 	

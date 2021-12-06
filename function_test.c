@@ -1,20 +1,36 @@
-#include "push_swap.h"
+#include <unistd.h>
+#include "libft/libft.h"
 
-void	quick_sort(t_list **la, t_list **lb, int len, int prev_pivot)
+int smallest(int *arr, int size)//Ok
 {
-	int	pivot;
-	int pushes;
+	int i;
+	int	j;
+	int min;
 	
-	pivot = len / 2;
-	while (pushes < pivot - prev_pivot)
+	min = arr[0];
+	i = 0;
+	j = 0;
+	while (i < size)
 	{
-		if (*((int *)(*la)->content) > pivot)
-			rotate(la, "ra\n");
-		else
-			push(la, lb, "pb\n");
+		if (min > arr[i])
+		{
+			min = arr[i];
+			j = i;
+		}
+		i++;
 	}
-	if (!check_sort(*la, 0))
-		quick_sort(la, lb, len / 2, pivot);
-	else
-		print_stacks(*la, *lb, len + 2);
+	return (j);
+}
+
+int main(int argc, char **argv)
+{
+	int arr[5];
+	arr[0] = 3;
+	arr[1] = 6;
+	arr[2] = 15;
+	arr[3] = 0;
+	arr[4] = 3;
+
+	ft_putnbr_fd(smallest(arr, 5), 1);
+
 }

@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 19:25:33 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/11/22 14:48:38 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/01 01:10:00 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	rotate(t_list **lst, char *s)
 {
 	t_list	*temp;
 	t_list	*p;
-
 	if ((*lst != NULL) && ((*lst)->next != NULL))
 	{
 		temp = (*lst)->next;
@@ -61,7 +60,7 @@ void	reverse_rotate(t_list **lst, char *s)
 {
 	t_list	*p1;
 	t_list	*p2;
-
+	
 	if ((*lst != NULL) && ((*lst)->next != NULL))
 	{
 		p1 = *lst;
