@@ -77,19 +77,22 @@ void	sort_3(t_list **lst, int num)
 		swap(lst, "sa");
 	else
 	{
-		n1 = *((int *)(*lst)->content);
-		n2 = *((int *)((*lst)->next)->content);
-		n3 = *((int *)(((*lst)->next)->next)->content);
-		if ((n1 < n3) && (n2 > n3))//OK 1 3 2
-			reverse_rotate(lst, "rra\n");
-		if ((n1 > n2) && (n2 > n3))//OK 3 2 1
-			swap(lst, "sa\n");
-		if ((n1 > n2) && (n1 < n3))//OK 2 1 3
-			swap(lst, "sa\n");
-		if ((n1 > n3) && (n2 > n1))//OK 2 3 1
-			reverse_rotate(lst, "rra\n");
-		if ((n1 > n3) && (n3 > n2))//OK 3 1 2
-			rotate(lst, "ra\n");
+		while(!((n1 < n2) && (n2 < n3)))
+		{
+			n1 = *((int *)(*lst)->content);
+			n2 = *((int *)((*lst)->next)->content);
+			n3 = *((int *)(((*lst)->next)->next)->content);
+			if ((n1 < n3) && (n2 > n3))//OK 1 3 2
+				reverse_rotate(lst, "rra\n");
+			if ((n1 > n2) && (n2 > n3))//OK 3 2 1
+				swap(lst, "sa\n");
+			if ((n1 > n2) && (n1 < n3))//OK 2 1 3
+				swap(lst, "sa\n");
+			if ((n1 > n3) && (n2 > n1))//OK 2 3 1
+				reverse_rotate(lst, "rra\n");
+			if ((n1 > n3) && (n3 > n2))//OK 3 1 2
+				rotate(lst, "ra\n");
+		}
 	}
 }
 
@@ -99,19 +102,22 @@ void	reverse_sort_3(t_list **lst)
 	int		n2;
 	int		n3;
 
-	n1 = *((int *)(*lst)->content);
-	n2 = *((int *)((*lst)->next)->content);
-	n3 = *((int *)(((*lst)->next)->next)->content);
-	if ((n1 < n2) && (n2 < n3))//OK 1 2 3
-		rotate(lst, "rb\n");
-	if ((n1 > n3) && (n3 > n2))//OK 3 1 2
-		reverse_rotate(lst, "rrb\n");
-	if ((n1 < n3) && (n2 > n3))//OK 1 3 2
-		rotate(lst, "rb\n");
-	if ((n1 > n2) && (n1 < n3))//OK 2 1 3
-		reverse_rotate(lst, "rrb\n");
-	if ((n1 > n3) && (n2 > n1))//OK 2 3 1
-		swap(lst, "sb\n");
+	while(!((n1 > n2) && (n2 > n3)))
+	{
+		n1 = *((int *)(*lst)->content);
+		n2 = *((int *)((*lst)->next)->content);
+		n3 = *((int *)(((*lst)->next)->next)->content);
+		if ((n1 < n2) && (n2 < n3))//OK 1 2 3
+			rotate(lst, "rb\n");
+		if ((n1 > n3) && (n3 > n2))//OK 3 1 2
+			reverse_rotate(lst, "rrb\n");
+		if ((n1 < n3) && (n2 > n3))//OK 1 3 2
+			rotate(lst, "rb\n");
+		if ((n1 > n2) && (n1 < n3))//OK 2 1 3
+			reverse_rotate(lst, "rrb\n");
+		if ((n1 > n3) && (n2 > n1))//OK 2 3 1
+			swap(lst, "sb\n");
+	}
 }
 
 int	*get_index(int *num)
@@ -187,23 +193,6 @@ void	find_largest_push_back(t_list **la, t_list **lb, int len)
 	}
 }
 
-/* void	find_largest_smalest_push_back(t_list **la, t_list **lb, int len)
-{
-	int index[2];
-	int move_count[2];
-	t_list	*p;
-
-	while (len)
-	{
-		move_count[0] = 0;
-		move_count[1] = 0;
-		p = *lb;
-		while (*(int *)p->content != len) || (*(int *)p->content) != smallest
-
-	}
-
-
-}*/
 
 void	search_best_move(t_list *la, int part, int moves[2], int index[2])
 {
