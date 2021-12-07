@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/06 21:52:50 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/07 01:54:28 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,8 +267,8 @@ int	main(int argc, char **argv)
 		// n_divider_sort(&la, &lb, num[0], 11);
 		// n_divider_sort_correct(&la, &lb, num[0], 11);
 		//ft_lstiter(la, print_all);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	ft_lstiter(la, print_all);
+	// ft_putchar_fd('\n', STDOUT_FILENO);
+	// ft_lstiter(la, print_all);
 	free_stack_array_exit(&la, &lb, &num, 0);
 	return (0);
 }

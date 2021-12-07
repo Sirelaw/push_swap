@@ -6,29 +6,13 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:43:03 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/07 00:09:39 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/07 02:05:18 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int biggest(int *arr, int size)// OK
-{
-	int i;
-	int max;
-
-	max = 0;
-	i = 0;
-	while (i < size)
-	{
-		if (max < arr[i])
-			max = arr[i];
-		i++;
-	}
-	return (max);
-}
-
-int smallest(int *arr, int size)//Ok
+int smallest(int *arr, int size)
 {
 	int i;
 	int	j;
@@ -49,7 +33,7 @@ int smallest(int *arr, int size)//Ok
 	return (j);
 }
 
-void	rotate_both(t_list **la, t_list **lb, int n)//OK
+void	rotate_both(t_list **la, t_list **lb, int n)
 {
 	while (n-- > 0)
 	{		
@@ -67,14 +51,6 @@ void	reverse_rotate_both(t_list **la, t_list **lb, int n)
 	}
 }
 
-int bigger(int n1, int n2)
-{
-	if (n1 > n2)
-		return (n1);
-	else
-		return (n2);
-}
-
 int smaller(int n1, int n2)
 {
 	if (n1 < n2)
@@ -82,7 +58,6 @@ int smaller(int n1, int n2)
 	else
 		return (n2);
 }
-
 
 void	move_stack_a(t_list **la, int move)
 {
@@ -104,19 +79,6 @@ void	move_stack_a(t_list **la, int move)
 	}
 }
 
-int direction_check(t_list *lst, int move)
-{
-	int len;
-
-	len = ft_lstsize(lst);
-	if (move <= 0)
-		move = 0;
-	if (move <= ((len / 2) + 1))
-		return (1);
-	else
-		return (2);
-}
-
 void	move_stack_b(t_list **lb, int move)
 {
 	int len;
@@ -136,6 +98,19 @@ void	move_stack_b(t_list **lb, int move)
 			reverse_rotate(lb, "rrb\n");
 	}
 
+}
+
+int direction_check(t_list *lst, int move)
+{
+	int len;
+
+	len = ft_lstsize(lst);
+	if (move <= 0)
+		move = 0;
+	if (move <= ((len / 2) + 1))
+		return (-1);
+	else
+		return (len - move);
 }
 
 int find_fit(t_list *lb, int index)
@@ -213,9 +188,6 @@ int magic_algo(t_list *la, t_list *lb, int min_max[2])
 	int *temp;
 	int *tot_moves;
 
-
-	temp = NULL;
-	tot_moves = NULL;
 	len_a = ft_lstsize(la);
 	len_b = ft_lstsize(lb);
 	i = 0;
@@ -234,8 +206,8 @@ int magic_algo(t_list *la, t_list *lb, int min_max[2])
 	while (i++ < len_a)
 		tot_moves[i - 1] += temp[i - 1];
 	i = smallest(tot_moves, len_a);
-	// free(temp);
-	// free(tot_moves);
+	free(temp);
+	free(tot_moves);
 	return (i);
 }
 
@@ -246,24 +218,21 @@ void	move_both(t_list **la, t_list **lb, int move_a, int move_b)
 
 	direction_a = direction_check(*la, move_a);
 	direction_b = direction_check(*lb, move_b);
-	if ((direction_a == direction_b) && (direction_b == 1))
+	if ((direction_a == -1) && (direction_b == -1))
 	{
-		if (direction_a == 1)
-		{
-			rotate_both(la, lb, smaller(move_a, move_b));
-			move_stack_a(la, move_a - move_b);
-			move_stack_b(lb, move_b - move_a);
-		}
-		else
-		{
-			reverse_rotate_both(la, lb, smaller(move_a, move_b));
-			move_a = move_a - smaller(move_a, move_b);
-			move_b = move_b - smaller(move_a, move_b);
-			while (--move_a > 0)
-				reverse_rotate(la, "rra\n");
-			while (--move_b > 0)
-				reverse_rotate(lb, "rrb\n");
-		}
+		rotate_both(la, lb, smaller(move_a, move_b));
+		move_stack_a(la, move_a - move_b);
+		move_stack_b(lb, move_b - move_a);
+	}
+	else if ((direction_a != -1) && (direction_b != -1))
+	{
+		reverse_rotate_both(la, lb, smaller(direction_a, direction_b));
+		move_a = direction_a - smaller(direction_a, direction_b);
+		move_b = direction_b - smaller(direction_a, direction_b);
+		while (move_a-- > 0)
+			reverse_rotate(la, "rra\n");
+		while (move_b-- > 0)
+			reverse_rotate(lb, "rrb\n");	
 	}
 	else
 	{
@@ -271,7 +240,7 @@ void	move_both(t_list **la, t_list **lb, int move_a, int move_b)
 		move_stack_b(lb, move_b);
 	}
 }
-
+	
 void	move_stacks(t_list **la, t_list **lb, t_list *p, int min_max[2])
 {
 	int i;
@@ -292,8 +261,6 @@ void	move_stacks(t_list **la, t_list **lb, t_list *p, int min_max[2])
 	}
 	move_b = right_insert(*lb, min_max, *((int *)(p)->content));
 	move_both(la, lb, move_a, move_b);
-	// move_stack_a(la, move_a);
-	// move_stack_b(lb, move_b);
 }
 
 void	rotate_to_min(t_list **la)

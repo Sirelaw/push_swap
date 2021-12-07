@@ -22,6 +22,14 @@ int smallest(int *arr, int size)//Ok
 	return (j);
 }
 
+int smaller(int n1, int n2)
+{
+	if (n1 < n2)
+		return (n1);
+	else
+		return (n2);
+}
+
 int main(int argc, char **argv)
 {
 	int arr[5];
@@ -31,6 +39,6 @@ int main(int argc, char **argv)
 	arr[3] = 0;
 	arr[4] = 3;
 
-	ft_putnbr_fd(smallest(arr, 5), 1);
+	ft_putnbr_fd(smaller(arr[2], arr[1]), 1);
 
 }
