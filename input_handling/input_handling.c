@@ -6,17 +6,11 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:17:25 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/04 23:06:43 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:35:59 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	ft_error(void)
-{
-	write(STDERR_FILENO, "Error\n", 6);
-	exit(1);
-}
+#include "../include/push_swap.h"
 
 static int	do_atoi(const char *str)
 {
@@ -49,8 +43,8 @@ static int	do_atoi(const char *str)
 
 static int	check_duplic(int *arr, int n)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < n)
@@ -73,8 +67,8 @@ static void	digit_check(char *s)
 	i = 0;
 	while (s[i++] != '\0')
 	{
-		if ((!ft_isdigit(s[i - 1])) && (!(((s[i - 1] == '-') ||
-				(s[i - 1] == '+')) && (i - 1 == 0))))
+		if ((!ft_isdigit(s[i - 1])) && (!(((s[i - 1] == '-')
+						|| (s[i - 1] == '+')) && (i - 1 == 0))))
 			ft_error();
 	}
 	i = 0;
@@ -109,9 +103,9 @@ static int	*convert_to_array(char *s)
 	return (arr);
 }
 
-int			*get_input(int argc, char **argv)
+int	*get_input(int argc, char **argv)
 {
-	int i;
+	int	i;
 	int	*num;
 
 	i = 0;

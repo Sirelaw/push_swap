@@ -6,7 +6,7 @@
 #    By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/13 19:02:48 by oipadeol          #+#    #+#              #
-#    Updated: 2021/11/16 20:22:30 by oipadeol         ###   ########.fr        #
+#    Updated: 2021/12/10 15:18:33 by oipadeol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,24 +26,30 @@ SRC = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalpha.c ft_isalnum.c ft_isascii.c\
 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c\
 		ft_lstmap.c ft_lstelem.c
 
+OBJ = obj_files
+
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(SRC)
 	@$(MAKE) -s lib
-	@$(MAKE) -s clean
+	@echo "library created."
 
 lib: objects
-	ar -cr $(NAME) *.o
-
+	ar -cr $(NAME) $(OBJ)/*.o
+	
 objects:
 	gcc -c $(FLAGS) $(SRC)
+	@mv *.o $(OBJ)
 
 clean:
-	rm -f *.o
+	@rm -f $(OBJ)/*.o
+	@echo "*.o files deleted"
 
-fclean: clean
-	rm -f $(NAME)
+fclean:
+	@$(MAKE) clean -s
+	@rm -f $(NAME)
+	@echo "library deleted."
 
 re: fclean all

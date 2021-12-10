@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   basic_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 19:25:33 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/01 01:10:00 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:30:12 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	push(t_list **la, t_list **lb, char *s)
 {
@@ -19,7 +19,7 @@ void	push(t_list **la, t_list **lb, char *s)
 	if (*la != NULL)
 	{
 		temp = (*la)->next;
-		ft_lstadd_front(lb, *la);			
+		ft_lstadd_front(lb, *la);
 		*la = temp;
 		write(STDOUT_FILENO, s, ft_strlen(s));
 	}
@@ -43,6 +43,7 @@ void	rotate(t_list **lst, char *s)
 {
 	t_list	*temp;
 	t_list	*p;
+
 	if ((*lst != NULL) && ((*lst)->next != NULL))
 	{
 		temp = (*lst)->next;
@@ -60,7 +61,7 @@ void	reverse_rotate(t_list **lst, char *s)
 {
 	t_list	*p1;
 	t_list	*p2;
-	
+
 	if ((*lst != NULL) && ((*lst)->next != NULL))
 	{
 		p1 = *lst;
@@ -72,11 +73,10 @@ void	reverse_rotate(t_list **lst, char *s)
 				p2->next = *lst;
 				p1->next = NULL;
 				*lst = p2;
-				break;
+				break ;
 			}
 			p1 = p1->next;
 		}
 	}
 	write(STDOUT_FILENO, s, ft_strlen(s));
 }
-

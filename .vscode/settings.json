@@ -1,6 +1,6 @@
 {
+	"makefile.extensionOutputFolder": "./.vscode",
 	"files.associations": {
-		"__bit_reference": "c",
-		"algorithm": "c"
+		"push_swap.h": "c"
 	}
 }

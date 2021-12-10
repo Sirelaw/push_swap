@@ -6,13 +6,13 @@
 #    By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 20:23:06 by oipadeol          #+#    #+#              #
-#    Updated: 2021/12/05 18:50:52 by oipadeol         ###   ########.fr        #
+#    Updated: 2021/12/10 16:22:02 by oipadeol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME =	push_swap
 
-SRC = push_swap.c operations.c input_handling.c OK.c wheel_algo.c
+SRC =	push_swap.c 
 
 #FLAGS = -Wall -Werror -Wextra
 
@@ -20,22 +20,25 @@ FLAGS =
 
 SUB_DIR = libft
 
+SUB_DIR_M = big_sort/*.c stack_movers/*.c input_handling/*.c LIS/*.c\
+			small_sort/*.c utils/*.c\
+
 all: $(NAME)
 
-$(NAME): $(SRC) $(SUB_DIR)/*.c
+$(NAME): $(SRC) 
 	@cd $(SUB_DIR) && $(MAKE) -s
-	@gcc -o $(NAME) $(FLAGS) $(SRC) $(SUB_DIR)/$(SUB_DIR).a
-	@$(MAKE) -s clean
+	@gcc -o $(NAME) $(FLAGS) $(SRC) $(SUB_DIR)/$(SUB_DIR).a $(SUB_DIR_M)
 	@echo "compiled!"
-	@echo ".o files deleted"
 
 bonus: $(NAME)
 
 clean:
-	@rm -f *.o
-	@cd $(SUB_DIR) && $(MAKE) -s clean
+	@rm -f $(NAME)
 
-fclean: clean
+clean_libft:
+	@cd $(SUB_DIR) && $(MAKE) -s clean
+	
+fclean:
 	@rm -f $(NAME)
 	@cd $(SUB_DIR) && $(MAKE) -s fclean
 
