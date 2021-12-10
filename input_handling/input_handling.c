@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:17:25 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 15:35:59 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:30:36 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	*convert_to_array(char *s)
 		return (NULL);
 	while (ch[i])
 		i++;
-	arr = ft_calloc(i + 1, sizeof(int));
+	arr = (int *) ft_calloc(i + 1, sizeof(int));
 	if (arr == NULL)
 		return (NULL);
 	arr[0] = i;
@@ -111,9 +111,9 @@ int	*get_input(int argc, char **argv)
 	i = 0;
 	if (argc == 2)
 		num = convert_to_array(argv[1]);
-	else if (argc > 2)
+	else
 	{
-		num = ft_calloc(argc, sizeof(int *));
+		num = (int *) ft_calloc(argc, sizeof(int *));
 		if (num == NULL)
 			return (0);
 		num[0] = argc - 1;

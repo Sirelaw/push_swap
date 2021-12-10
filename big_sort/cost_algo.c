@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:43:03 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 15:35:27 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:31:34 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static void	push_non_lis_to_b(t_list **la, t_list **lb, int *lis)
 void	cost_algo(t_list **la, t_list **lb, int *lis)
 {
 	int		min_max[2];
-	int		moves[2];
 	t_list	*p;
 
 	push_non_lis_to_b(la, lb, lis);

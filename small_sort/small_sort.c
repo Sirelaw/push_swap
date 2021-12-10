@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:14:53 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 15:36:21 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:35:27 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ static void	sort_into_b(t_list **la, t_list **lb, int n, int stack_size)
 
 void	sort_below_10(t_list **la, t_list **lb, int num)
 {
-	t_list	*p;
 	int		n1;
 	int		stack_size;
 
