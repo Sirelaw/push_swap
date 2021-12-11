@@ -6,11 +6,23 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 20:56:09 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 15:35:32 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 16:07:39 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+t_list	*create_linked_list(int *arr)
+{
+	int		i;
+	t_list	*lst;
+
+	i = arr[0];
+	lst = ft_lstnew((int *) &arr[i]);
+	while (--i > 0)
+		ft_lstadd_front(&lst, ft_lstnew((int *) &arr[i]));
+	return (lst);
+}
 
 int	find_fit(t_list *lst, int index)
 {

@@ -6,16 +6,21 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:45:59 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 15:36:40 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:44:25 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ft_error(void)
+void	ft_error(int checker)
 {
-	write(STDERR_FILENO, "Error\n", 6);
-	exit(1);
+	if (checker)
+		exit(1);
+	else
+	{
+		write(STDERR_FILENO, "Error\n", 6);
+		exit(1);
+	}
 }
 
 int	smallest(int *arr, int size)

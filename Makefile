@@ -6,7 +6,7 @@
 #    By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 20:23:06 by oipadeol          #+#    #+#              #
-#    Updated: 2021/12/10 16:26:37 by oipadeol         ###   ########.fr        #
+#    Updated: 2021/12/11 17:55:09 by oipadeol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,26 +18,37 @@ FLAGS = -Wall -Werror -Wextra
 
 SUB_DIR = libft
 
+BONUS = checker
+
+B_SRC = checker_src/*.c
+
 SUB_DIR_M = big_sort/*.c stack_movers/*.c input_handling/*.c LIS/*.c\
 			small_sort/*.c utils/*.c\
 
 all: $(NAME)
 
-$(NAME): $(SRC) 
+$(NAME): $(SRC) $(SUB_DIR_M)
 	@cd $(SUB_DIR) && $(MAKE) -s
 	@gcc -o $(NAME) $(FLAGS) $(SRC) $(SUB_DIR)/$(SUB_DIR).a $(SUB_DIR_M)
-	@echo "compiled!"
+	@echo "push_swap compiled!"
 
-bonus: $(NAME)
+bonus: $(BONUS)
+
+$(BONUS): $(B_SRC) $(SUB_DIR_M)
+	@gcc -o checker $(FLAGS) $(B_SRC) $(SUB_DIR)/$(SUB_DIR).a\
+	 $(SUB_DIR_M)
+	@echo "checker program created"
 
 clean:
 	@rm -f $(NAME)
+	@rm -f $(BONUS)
 
 clean_libft:
 	@cd $(SUB_DIR) && $(MAKE) -s clean
 
 fclean:
 	@rm -f $(NAME)
+	@rm -f $(BONUS)
 	@cd $(SUB_DIR) && $(MAKE) -s fclean
 
 re: fclean all

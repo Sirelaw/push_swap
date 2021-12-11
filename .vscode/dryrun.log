@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/oipadeol/projects/savemoves_push_swap/push_swap_submit'
+make: Nothing to be done for `all'.
+ 
+make: Leaving directory `/Users/oipadeol/projects/savemoves_push_swap/push_swap_submit'
+ 

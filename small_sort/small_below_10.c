@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   small_sort.c                                       :+:      :+:    :+:   */
+/*   small_below_10.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:14:53 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 16:35:27 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:41:41 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	*get_index(int *num)
 	int	smaller;
 	int	*indexx;
 
-	indexx = ft_calloc(num[0] + 1, sizeof(int));
+	indexx = (int *) ft_calloc(num[0] + 1, sizeof(int));
 	i = 0;
 	j = 1;
 	smaller = 1;

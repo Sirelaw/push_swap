@@ -6,13 +6,13 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:17:25 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 16:30:36 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:05:42 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static int	do_atoi(const char *str)
+static int	do_atoi(const char *str, int checker)
 {
 	int		i;
 	long	num;
@@ -35,13 +35,13 @@ static int	do_atoi(const char *str)
 	{
 		num = (num * 10) + (str[i] - 48);
 		if ((num > INT_MAX) || ((num * sign) < INT_MIN))
-			ft_error();
+			ft_error(checker);
 		i++;
 	}
 	return (sign * num);
 }
 
-static int	check_duplic(int *arr, int n)
+static int	check_duplic(int *arr, int n, int checker)
 {
 	int	i;
 	int	j;
@@ -53,14 +53,14 @@ static int	check_duplic(int *arr, int n)
 		while ((i + j) < n)
 		{
 			if (arr[i] == arr[i + j++])
-				ft_error();
+				ft_error(checker);
 		}
 		i++;
 	}
 	return (0);
 }
 
-static void	digit_check(char *s)
+static void	digit_check(char *s, int checker)
 {
 	int	i;
 
@@ -69,12 +69,12 @@ static void	digit_check(char *s)
 	{
 		if ((!ft_isdigit(s[i - 1])) && (!(((s[i - 1] == '-')
 						|| (s[i - 1] == '+')) && (i - 1 == 0))))
-			ft_error();
+			ft_error(checker);
 	}
 	i = 0;
 }
 
-static int	*convert_to_array(char *s)
+static int	*convert_to_array(char *s, int checker)
 {
 	int		i;
 	int		j;
@@ -95,22 +95,22 @@ static int	*convert_to_array(char *s)
 	i = 0;
 	while (ch[i++])
 	{
-		digit_check(ch[i - 1]);
-		arr[i] = do_atoi(ch[i - 1]);
+		digit_check(ch[i - 1], checker);
+		arr[i] = do_atoi(ch[i - 1], checker);
 		free(ch[i - 1]);
 	}
 	free(ch);
 	return (arr);
 }
 
-int	*get_input(int argc, char **argv)
+int	*get_input(int argc, char **argv, int checker)
 {
 	int	i;
 	int	*num;
 
 	i = 0;
 	if (argc == 2)
-		num = convert_to_array(argv[1]);
+		num = convert_to_array(argv[1], checker);
 	else
 	{
 		num = (int *) ft_calloc(argc, sizeof(int *));
@@ -119,10 +119,10 @@ int	*get_input(int argc, char **argv)
 		num[0] = argc - 1;
 		while (i++ < num[0])
 		{
-			digit_check((char *)argv[i]);
-			num[i] = do_atoi((char *) argv[i]);
+			digit_check((char *)argv[i], checker);
+			num[i] = do_atoi((char *) argv[i], checker);
 		}
 	}
-	check_duplic(&(num[1]), num[0]);
+	check_duplic(&(num[1]), num[0], checker);
 	return (num);
 }
