@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:43:03 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/10 16:31:34 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:50:04 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ static int	magic_algo(t_list *la, t_list *lb, int min_max[2])
 	get_insert_cost(la, lb, min_max, &temp);
 	get_total_moves(la, lb, &a_moves, temp);
 	i = smallest(a_moves, len_b);
-	//free(temp);
-	//free(a_moves);
-	// printf("\n Here \n");
+	free(temp);
+	free(a_moves);
 	return (i);
 }
 

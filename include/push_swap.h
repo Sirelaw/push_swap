@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:14:38 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 20:01:15 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:16:45 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	rotate_stack_a(t_list **la, int move);
 int		move_both(t_list **la, t_list **lb, int move_a, int move_b);
 void	move_stacks(t_list **la, t_list **lb, t_list *p, int min_max[2]);
 // Finds the right positon to insert index in already sorted list lst 
+// min_max[2] are the current min and max of lst respectively.
 int		right_insert(t_list *lst, int min_max[2], int index);
 int		check_sort(t_list *lst, int ret);
 void	sort_3(t_list **lst, int num);

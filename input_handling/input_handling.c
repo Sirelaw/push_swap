@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:17:25 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 18:05:42 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:55:23 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static int	do_atoi(const char *str, int checker)
 	while (ft_strchr(" \n\t\v\f\r", str[i]))
 		i++;
 	if ((str[i] == '-') || (str[i] == '+'))
-	{
 		if (str[i] == '-')
 			sign = (-1);
+	if ((str[i] == '-') || (str[i] == '+'))
 		i++;
-	}
 	while ((str[i] > 47) && (str[i] < 58))
 	{
 		num = (num * 10) + (str[i] - 48);
-		if ((num > INT_MAX) || ((num * sign) < INT_MIN))
+		if (((num > INT_MAX) || ((num * sign) < INT_MIN))
+			&& (num * sign != INT_MIN))
 			ft_error(checker);
 		i++;
 	}
@@ -69,6 +69,8 @@ static void	digit_check(char *s, int checker)
 	{
 		if ((!ft_isdigit(s[i - 1])) && (!(((s[i - 1] == '-')
 						|| (s[i - 1] == '+')) && (i - 1 == 0))))
+			ft_error(checker);
+		if ((((s[i - 1] == '-') || (s[i - 1] == '+')) && (s[i] == '\0')))
 			ft_error(checker);
 	}
 	i = 0;

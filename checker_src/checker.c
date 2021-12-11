@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:28:51 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 19:46:30 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:17:26 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char	*get_next_line_buf_1(int fd)
 		}
 		i = read(fd, temp, 1);
 		if (i <= 0)
+			free (ret);
+		if (i <= 0)
 			return (NULL);
 		if (ft_join(&ret, *temp))
 			return (ret);
@@ -67,13 +69,11 @@ char	*get_next_line_buf_1(int fd)
 
 int	main(int argc, char **argv)
 {
-	char	*s;
 	int		*num;
 	t_list	*la;
 	t_list	*lb;
 
-	num = NULL;
-	s = NULL;
+	la = NULL;
 	lb = NULL;
 	if (argc < 2)
 		return (1);
