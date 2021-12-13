@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:14:38 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 22:16:45 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:17:54 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 t_list	*create_linked_list(int *arr);
-void	ft_error(int checker);
+void	ft_error(void);
 int		smallest(int *arr, int size);
 int		smaller(int n1, int n2);
 int		bigger(int n1, int n2);
@@ -30,7 +30,7 @@ void	rotate(t_list **lst, char *s);
 void	reverse_rotate(t_list **lst, char *s);
 void	rotate_la_to_min(t_list **la);
 int		*get_index(int *num);
-int		*get_input(int argc, char **argv, int checker);
+int		*get_input(int argc, char **argv);
 void	rotate_both(t_list **la, t_list **lb, int n);
 void	reverse_rotate_both(t_list **la, t_list **lb, int n);
 void	rotate_stack_b(t_list **lb, int move);

@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 21:54:50 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:20:22 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	la = NULL;
 	if (argc < 2)
 		return (1);
-	num = get_input(argc, argv, 0);
+	num = get_input(argc, argv);
 	num = get_index(num);
 	la = create_linked_list(num);
 	if (check_sort(la, 1))
