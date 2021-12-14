@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:14:38 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/12 16:17:54 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:44:35 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		check_sort(t_list *lst, int ret);
 void	sort_3(t_list **lst, int num);
 void	sort_below_10(t_list **la, t_list **lb, int num);
 void	cost_algo(t_list **la, t_list **lb, int *lis);
+// Returns the longest increasing sequence in num.
+// num[0] == size and num[1] is the first element in array num.
 int		*find_lis(int *num, int size);
 int		best_rot(t_list *la, t_list *lb, int move_a, int move_b);
 int		best_rot_type(t_list *la, t_list *lb, int move_a, int move_b);

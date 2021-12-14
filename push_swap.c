@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/12 16:20:22 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:33:53 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	main(int argc, char **argv)
 	t_list	*la;
 	t_list	*lb;
 
-	lb = NULL;
 	la = NULL;
+	lb = NULL;
 	if (argc < 2)
 		return (1);
 	num = get_input(argc, argv);
