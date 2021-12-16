@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:28:51 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/12 16:17:21 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/15 21:30:16 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv)
 	num = get_index(num);
 	la = create_linked_list(num);
 	perform_operations_on_list(&la, &lb);
-	if (check_sort(la, 0))
+	if ((check_sort(la, 0)) && (lb == NULL))
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);

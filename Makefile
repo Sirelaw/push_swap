@@ -6,7 +6,7 @@
 #    By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 20:23:06 by oipadeol          #+#    #+#              #
-#    Updated: 2021/12/11 17:55:09 by oipadeol         ###   ########.fr        #
+#    Updated: 2021/12/15 22:22:34 by oipadeol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,15 @@ SUB_DIR_M = big_sort/*.c stack_movers/*.c input_handling/*.c LIS/*.c\
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(SUB_DIR_M)
+$(NAME): $(SRC) $(SUB_DIR_M) $(SUB_DIR)/*.c
 	@cd $(SUB_DIR) && $(MAKE) -s
 	@gcc -o $(NAME) $(FLAGS) $(SRC) $(SUB_DIR)/$(SUB_DIR).a $(SUB_DIR_M)
 	@echo "push_swap compiled!"
 
 bonus: $(BONUS)
 
-$(BONUS): $(B_SRC) $(SUB_DIR_M)
+$(BONUS): $(B_SRC) $(SRC) $(SUB_DIR_M) $(SUB_DIR)/*.c
+	@cd $(SUB_DIR) && $(MAKE) -s
 	@gcc -o checker $(FLAGS) $(B_SRC) $(SUB_DIR)/$(SUB_DIR).a\
 	 $(SUB_DIR_M)
 	@echo "checker program created"

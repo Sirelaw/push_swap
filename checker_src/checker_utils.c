@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 19:32:03 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 23:10:38 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:36:15 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	perform_operations_on_list(t_list **la, t_list **lb)
 			perform_2(la, lb, s);
 		if (!good_operation(s))
 		{
-			write(STDOUT_FILENO, "KO: Unknown operation\n", 2);
+			write(STDERR_FILENO, "Error: Unknown operation\n", 25);
 			free(s);
 			exit(1);
 		}
