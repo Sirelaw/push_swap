@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:14:53 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 18:41:41 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/18 06:14:14 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sort_3(t_list **lst, int num)
 	int		n3;
 
 	if (num == 2)
-		swap(lst, "sa");
+		swap(lst, "sa\n");
 	else
 	{
 		n1 = *((int *)(*lst)->content);

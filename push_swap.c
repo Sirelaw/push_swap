@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:47:14 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/13 19:33:53 by oipadeol         ###   ########.fr       */
+/*   Updated: 2021/12/18 06:13:25 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	num = get_input(argc, argv);
 	num = get_index(num);
 	la = create_linked_list(num);
-	if (check_sort(la, 1))
+	if (check_sort(la, 0))
 		free_stack_array_exit(&la, &lb, &num, 1);
 	if (num[0] <= 3)
 		sort_3(&la, num[0]);
