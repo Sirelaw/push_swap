@@ -6,7 +6,7 @@
 /*   By: oipadeol <oipadeol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:43:03 by oipadeol          #+#    #+#             */
-/*   Updated: 2021/12/11 20:50:04 by oipadeol         ###   ########.fr       */
+/*   Updated: 2022/05/27 12:09:04 by oipadeol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,30 @@ static int	magic_algo(t_list *la, t_list *lb, int min_max[2])
 	return (i);
 }
 
+static void	push_to_b(t_list **la, t_list **lb, int lis, int* i)
+{
+	push(la, lb, "pb\n");
+	if (*((int *)(*la)->content) == lis)
+	{
+		(*i)++;
+		rotate(la, "rr\n");
+		rotate(lb, "");
+	}
+	else
+		rotate(lb, "rb\n");
+}
+
 static void	push_non_lis_to_b(t_list **la, t_list **lb, int *lis)
 {
 	int	i;
+	int	groups;
 
-	i = 1;
+	groups = ft_lstsize(*la);
+	groups /= 4;
 	while (*((int *)(*la)->content) != lis[0])
 		push(la, lb, "pb\n");
 	rotate(la, "ra\n");
+	i = 1;
 	while (*((int *)(*la)->content) != lis[0])
 	{
 		if (*((int *)(*la)->content) == lis[i])
@@ -81,8 +97,28 @@ static void	push_non_lis_to_b(t_list **la, t_list **lb, int *lis)
 			i++;
 			rotate(la, "ra\n");
 		}
-		else
+		else if (*((int *)(*la)->content) > groups && *((int *)(*la)->content) <= groups * 2) //2
+			push_to_b(la, lb, lis[i], &i);
+		else if (*((int *)(*la)->content) > groups * 2 && *((int *)(*la)->content) <= groups * 3) //3
 			push(la, lb, "pb\n");
+		else
+			rotate(la, "ra\n");
+	}
+	rotate(la, "ra\n");
+	i = 1;
+	while (*((int *)(*la)->content) != lis[0])
+	{
+		if (*((int *)(*la)->content) == lis[i])
+		{
+			i++;
+			rotate(la, "ra\n");
+		}
+		else if (*((int *)(*la)->content) <= groups) //1
+			push_to_b(la, lb, lis[i], &i);
+		else if (*((int *)(*la)->content) > groups * 3) //4
+			push(la, lb, "pb\n");
+		else
+			rotate(la, "ra\n");
 	}
 }
 
