@@ -25,6 +25,12 @@ This was the most interesting part of the project for me as I had to come up wit
 		- m has the largest LIS of all numbers having the first two properties. <br>
 - Starting from the last number and working my way to the first, I get the number with the largest LIS and then reconstruct this sequence.
 
+## Sorting Stack A
+- Once the LIS is found, every number not part of the LIS is pushed to Stack B.
+- Stack A is now sorted and every number in Stack B has a right position to fit into Stack A.
+- The number of steps required to push element from Stack A to B can be calculated and the minimum is pushed on each iteration.
+
+
 ## how to use the algorithm
 This will compile my code into an executable called `push_swap` and delete all unnecesarry files that were created during compilation.<br>
 
