@@ -4,8 +4,5 @@
 # Object files
 *.o
 
-#visualizer
-pyviz.py
-
 # macOS user view preference
 .DS_Store
