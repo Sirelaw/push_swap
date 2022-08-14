@@ -32,7 +32,7 @@ This will compile my code into an executable called `push_swap` and delete all u
 make
 ```
 
-To use the visualizer i used in the example below.<br>
+To use the visualizer used in the example below.<br>
 This visualizer is not mine, you can find it [here](https://github.com/o-reo/push_swap_visualizer "github.com/o-reo/push_swap_visualizer").
 
 ```
@@ -40,4 +40,4 @@ python3 pyviz.py `ruby -e "puts (1..50).to_a.shuffle.join(' ')"`
 ```
 
 ## visualization of my algorithm sorting 50 random integers
-![visualizer](https://github.com/Sirelaw/42_curcus_push_swap/blob/master/readme_addons/Screen-Recording-2022-08-14-at-1.27.54-AM.gif)
+![visualizer](https://github.com/Sirelaw/42_curcus_push_swap/blob/master/readme_addons/sample.gif)
