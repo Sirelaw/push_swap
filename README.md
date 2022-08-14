@@ -8,7 +8,7 @@ This is my solution for the push_swap project of 42 school.<br>
 - detecting a non-numeric, greater or smaller than integer or double number input<br>
 - sorting 3 random integers in 1 or 2 actions<br>
 - sorting 5 random integers in 5 to 10 actions<br>
-- sorintg 100 random integers with an average of ca. 600 actions<br>
+- sorintg 100 random integers with an average of ca. 550 actions<br>
 - sorting 500 random integers with an average of ca. 4200 actions<br>
 (both average amount of actions where the average of 1000 random tests)<br>
 
@@ -22,7 +22,7 @@ This was the most interesting part of the project for me as I had to come up wit
 - The LIS of every number n in the input is therefore 1 + the LIS of a number m. The number m has the following three properties<br>
 		- m is ahead of n in the sequence. <br>
 		- m > n <br>
-		- m has the largest LIS of all numbers fulfilling the first two properties. <br>
+		- m has the largest LIS of all numbers having the first two properties. <br>
 - Starting from the last number and working my way to the first, I get the number with the largest LIS and then reconstruct this sequence.
 
 ## how to use the algorithm
